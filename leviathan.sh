@@ -13,13 +13,6 @@ PREFIX="[LEVIATHAN]"
 # Title + Menu
 figlet -w 500  Project Leviathan
 figlet -w 100 by WarpWing
-echo -ne '#####                     (33%)\r'
-sleep 1
-echo -ne '#############             (66%)\r'
-sleep 1
-echo -ne '#######################   (100%)\r'
-echo -ne '\n'
-
 sleep 3s
 clear 
 echo $PREFIX Welcome to Project Leviathan
