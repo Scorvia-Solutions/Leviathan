@@ -24,7 +24,7 @@ function Grafana () {
     sudo apt update -y  &> /dev/null
     echo $PREFIX Installing Grafana 
     sudo apt install -y grafana &> /dev/null
-    echo $PREFIX Optimizing Grafana 
+    echo $PREFIX Optimizing Grafana #Add Port Setup and Service Enable
     sleep 4s #This sleep is to wait for Grafana to setup!
     echo $PREFIX Grafana Installation Complete. Moving on to InfluxDB!
     sleep 2s
@@ -50,6 +50,7 @@ function InfluxDB () {
     sudo systemctl enable influxdb &> /dev/null
     sudo systemctl start influxdb &> /dev/null
     #echo $PREFIX Optimizing InfluxDB
+    #Add Port Setup and Service Enable
     
 } 
 
