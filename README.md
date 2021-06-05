@@ -2,7 +2,7 @@
 A automated deploying solution that automatically setups up a optimized version of Grafana and InfluxDB through a simple curl-able bash script
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Scorvia-Solutions/Leviathan/main/leviathan.sh)"
+sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Scorvia-Solutions/Leviathan/main/leviathan.sh)"
 ```
 Curl that into any Linux Terminal (Designed for Ubuntu 20.04 and up but should work in theory for any other Debian based system.)
 ## Default Credentials
