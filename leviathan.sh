@@ -53,7 +53,7 @@ function InfluxDB () {
     sudo systemctl enable influxdb &> /dev/null
     sudo systemctl start influxdb &> /dev/null
     sleep 10s #Wait for Influxd to start up
-    echo $PREFIX Enabling Default Port 
+    echo $PREFIX Enabling Default Ports 
     sudo ufw allow 8086 8088 &> /dev/null
     echo $PREFIX Importing custom config
     sudo cp InfluxDB/influxdb.conf /etc/influxdb/influxdb.conf &> /dev/null
@@ -85,7 +85,7 @@ then
   Grafana
   echo $PREFIX Automatic Install Complete! Make sure to check that everything is properly configured!
   echo $PREFIX Please remember that the default user and password for Grafana is $USER_GRAFANA : $PASSWORD_GRAFANA
-  echo $PREFIX Also not that the default user and password for InfluxDB is $USER_INFLUX : $PASSWORD_INFLUX
+  echo $PREFIX Also note that the default user and password for InfluxDB is $USER_INFLUX : $PASSWORD_INFLUX
   echo $PREFIX Project Leviathan Install Complete. Session Terminating in 3 seconds
   sleep 3s
 else
