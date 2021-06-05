@@ -22,9 +22,11 @@ function Grafana () {
     echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list &> /dev/null
     echo $PREFIX Updating Source List
     sudo apt update -y  &> /dev/null
-    echo $PREFIX Installing Grafana 
+    echo $PREFIX Installing and Enabling Grafana
     sudo apt install -y grafana &> /dev/null
     sleep 10s #Wait for Grafana setup
+    sudo systemctl enable grafana-server &> /dev/null
+    sudo systemctl start grafana-server &> /dev/null
     echo $PREFIX Importing custom config
     sudo cp Grafana/grafana.ini /etc/grafana/grafana.ini &> /dev/null
     echo $PREFIX Creating Credentials 
