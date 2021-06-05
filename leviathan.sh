@@ -24,9 +24,12 @@ function Grafana () {
     sudo apt update -y  &> /dev/null
     echo $PREFIX Installing Grafana 
     sudo apt install -y grafana &> /dev/null
-    echo $PREFIX Optimizing Grafana #Add Port Setup and Service Enable
-    sleep 4s #This sleep is to wait for Grafana to setup!
-    echo $PREFIX Grafana Installation Complete. Moving on to InfluxDB!
+    sleep 10s #Wait for Grafana setup
+    echo $PREFIX Importing custom config
+    sudo cp Grafana/grafana.ini /etc/grafana/grafana.ini &> /dev/null
+    echo $PREFIX Creating Credentials 
+    sudo grafana-cli admin $PASSWORD_GRAFANA  &> /dev/null
+    echo $PREFIX Grafana Installation Complete. 
     sleep 2s
 
 
@@ -38,20 +41,26 @@ function InfluxDB () {
     echo $PREFIX Retrieving InfluxDB GPG Key and Adding it
     curl -s https://repos.influxdata.com/influxdb.key | sudo apt-key add - &> /dev/null
     echo $PREFIX Recovering Distrib Information
-    source /etc/lsb-release
+    source /etc/lsb-release &> /dev/null
     echo $PREFIX Adding Stable Repository to Source List 
     echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list &> /dev/null
     echo $PREFIX Updating Source List 
-    sudo apt update -y 
+    sudo apt update -y &> /dev/null
     echo $PREFIX Installing InfluxDB 
-    sudo apt install -y influxdb 
+    sudo apt install -y influxdb &> /dev/null
     echo $PREFIX Unmasking,Enabling and Starting InfluxDB 
     sudo systemctl unmask influxdb.service &> /dev/null
     sudo systemctl enable influxdb &> /dev/null
     sudo systemctl start influxdb &> /dev/null
-    echo $PREFIX Enabling Default Port
-    sudo ufw allow 8086 8088
-    echo $PREFIX Optimizing InfluxDB
+    sleep 10s #Wait for Influxd to start up
+    echo $PREFIX Enabling Default Port 
+    sudo ufw allow 8086 8088 &> /dev/null
+    echo $PREFIX Importing custom config
+    sudo cp InfluxDB/influxdb.conf /etc/influxdb/influxdb.conf &> /dev/null
+    echo $PREFIX Creating Credentials
+    sudo influx user create -n $USER_INFLUX -p $PASSWORd_INFLUX  &> /dev/null
+    echo $PREFIX InfluxDB Installation Complete. 
+    sleep 2s
 
     #Add Port Setup and Service Enable
     
@@ -72,13 +81,13 @@ then
   cd /tmp/
   git clone https://github.com/Scorvia-Solutions/Leviathan.git
   cd Leviathan/
-  Grafana
   InfluxDB
+  Grafana
   echo $PREFIX Automatic Install Complete! Make sure to check that everything is properly configured!
   echo $PREFIX Please remember that the default user and password for Grafana is $USER_GRAFANA : $PASSWORD_GRAFANA
   echo $PREFIX Also not that the default user and password for InfluxDB is $USER_INFLUX : $PASSWORD_INFLUX
-  echo $PREFIX Project Leviathan Install Complete. Session Terminating in 6 seconds
-  sleep 6s
+  echo $PREFIX Project Leviathan Install Complete. Session Terminating in 3 seconds
+  sleep 3s
 else
   echo Terminating Installation
 fi
