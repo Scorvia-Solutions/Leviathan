@@ -79,7 +79,7 @@ read -p "$PREFIX Are you ready to begin installing? [y/n]: " INPUT
 if [[ $INPUT == y ]]
 then
   cd /tmp/
-  git clone https://github.com/Scorvia-Solutions/Leviathan.git
+  git clone https://github.com/Scorvia-Solutions/Leviathan.git &> /dev/null
   cd Leviathan/
   InfluxDB
   Grafana
