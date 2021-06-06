@@ -60,7 +60,7 @@ function InfluxDB () {
     echo $PREFIX Importing custom config
     sudo cp InfluxDB/influxdb.conf /etc/influxdb/influxdb.conf &> /dev/null
     echo $PREFIX Creating Credentials
-    sudo influx user create -n $USER_INFLUX -p $PASSWORd_INFLUX  &> /dev/null
+    sudo influx user create -n $USER_INFLUX -p $PASSWORD_INFLUX  &> /dev/null
     echo $PREFIX InfluxDB Installation Complete. 
     sleep 2s
 
