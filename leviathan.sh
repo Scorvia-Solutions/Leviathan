@@ -36,8 +36,7 @@ function Grafana () {
 
 
 }
-                
-
+              
 #InfluxDB Install Function
 function InfluxDB () { 
     echo $PREFIX Retrieving InfluxDB GPG Key and Adding it
@@ -62,14 +61,8 @@ function InfluxDB () {
     echo $PREFIX Creating Credentials
     sudo influx user create -n $USER_INFLUX -p $PASSWORD_INFLUX  &> /dev/null
     echo $PREFIX InfluxDB Installation Complete. 
-    sleep 2s
-
-    #Add Port Setup and Service Enable
-    
+    sleep 2s  
 } 
-
-
-
 
 # Title + Menu
 figlet -w 500  Project Leviathan
@@ -93,9 +86,3 @@ then
 else
   echo Terminating Installation
 fi
-
-
-
-
-                        
-                
